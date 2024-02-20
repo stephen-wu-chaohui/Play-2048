@@ -23,7 +23,7 @@ const App = Vue.createApp({
     }, 'GamePlate.settings');
 
     const speed = ref(0);
-    const autoDriveSpeeds = [50, 200, 300, 500, 800, 1300, 2100]
+    const autoDriveSpeeds = [50, 150, 300, 600, 1300, 2100, 3000]
 
     function setSpeed() {
       let setingAutoDrive = autoDriveSpeeds[speed.value];
