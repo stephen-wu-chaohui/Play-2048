@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="./favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="./Play-2024.css">
+
+  <title>2048</title>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./LocalStoragePersist.js"></script>
+  <script src="./GamePlate.js"></script>
+  <script src="./GameRecorder.js"></script>
+  <script src="./Play-2024Auto.js"></script>
+  <script src="./BUYGEOMETRYDASH3.js"></script>
+  <script src="./swippedevent.js"></script>
+
+  <script type="text/x-template" id="main-view">
+    <div class="heading">
+      <div class="title">
+        <h1>2048</h1>
+      </div>
+      <div class="scores-container">
+        <div class="score-container">{{ scores.score }}
+        </div>
+        <div class="best-container" @click="replayGame('best')" :class="{active: !!runningModes.isReplaying}">
+          {{ tok(scores.bestScore) }}
+        </div>
+      </div>
+    </div>
+    <div class="above-game">
+      <p class="game-intro">Join the tiles, get to <strong>2024!</strong></p>
+      <div class="buttons">
+        <a class="button" id="restart" @click="newGame()">
+          New
+        </a>
+        <a class="button" id="autoDrive" @click="startAutoMode()" :class="{active: !!runningModes.hiAutoDrive}">
+          Auto
+        </a>
+        <a class="button" id="hack" @click="startHackMode()" :class="{active: !!runningModes.hiHack}">
+          Hack
+        </a>
+      </div>
+    </div>
+    <div class="game-container">
+      <div class="game-message" v-if="gameOver && !runningModes.hiHack">
+        <p>Game over!</p>
+        <a class="button" @click="newGame()">Try again</a>
+      </div>
+      <div class="game">
+        <div class="grid-item block" :class="`num-${v} news-${news[p]} move-${moves[p]}`" :style="animationStyles(v, p)" v-for="(v, p) in plate">
+            {{ v? ''+ v : '' }}
+        </div>
+      </div>
+      <div class="speed">
+        <input class="speed-adjust" type="range" v-model="speed" min="0" max="4" step="1" @input="setSpeed()">
+      </div>
+    </div>
+    <div data-swipe-threshold="10"
+       data-swipe-timeout="100"
+       data-swipe-ignore="false">
+        {{runningModes.currentCommand}}
+    </div>
+  </script>
+
+  <script src="./main.js"></script>
+
+</body>
+
+</html>
