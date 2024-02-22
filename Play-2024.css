@@ -386,6 +386,13 @@ div {
         font-size: 1.8rem;
       }
 
+      &.num-4096 {
+        color: #f9f6f2;
+        background: #705703;
+        box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.396825), inset 0 0 0 1px rgba(255, 255, 255, 0.238095);
+        font-size: 1.8rem;
+      }
+
     }
   }
 

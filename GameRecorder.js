@@ -31,6 +31,13 @@ class GameRecorder {
   }
 
   restore(score) {
+    if (!score) {
+      this.currentRecord.replay = true;
+      this.currentRecord.steps = this._procedureSteps(this.currentRecord.procedure);
+      this.isReplaying = true;
+      return;
+    }
+
     const itemName = `R-${score}`;
     const savedValue = localStorage.getItem(itemName);
     this.currentRecord = {}
