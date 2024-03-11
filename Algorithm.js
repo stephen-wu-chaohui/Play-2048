@@ -90,34 +90,31 @@ function estimate(playGround, cmd) {
     0, 0, 0, 0
   ];
 
-  // const mergeWeights = [
-  //   1200, 550, 260, 125,
-  //   15, 20, 25, 60,
-  //   7, 3, 2, 2,
-  //   2, 1, 1, 1
-  // ];
-
   const mergeWeights = [
-    25000, 12000, 10000, 8000,
-    49, 80, 250, 1500,
-    27, 9, 9, 2,
-    1, 0, 0, 0
+    2000, 550, 260, 125,
+    15, 15, 15, 60,
+    7, 7, 7, 7,
+    1, 1, 1, 3
   ];
+
+  // const mergeWeights = [
+  //   25000, 1200, 1000, 800,
+  //   49, 80, 250, 3500,
+  //   27, 9, 9, 2,
+  //   1, 0, 0, 0
+  // ];
 
   const plate = playGround.plate;
   const news = playGround.news;
   const merges = plate.map((v, i) => {
-    let mergeWeight = 0;
+    let s = 0
     if (i < 4 || i > 12 || (plate[i] <= plate[i - 4])) {
-      mergeWeight += mergeWeights[i];
+      s += stayWeights[i] * plate[i];
       if (news[i] == 'merge') {
-        mergeWeight += 1 * mergeWeights[i];
+        s += ((i < 4 && plate[i] <= 4) ? 1000 : plate[i]) * mergeWeights[i]
       }
     }
-    // if (i == 7 && plate[7] > plate[6]) {
-    //   mergeWeight *= 2;
-    // }
-    return mergeWeight * plate[i];
+    return s;
   });
 
   score += merges.reduce((a, b) => a + b, 0);
