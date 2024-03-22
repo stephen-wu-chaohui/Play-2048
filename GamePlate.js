@@ -99,7 +99,7 @@ class GamePlate {
     if (this.sandboxMode) {
       return -1;
     }
-    const emptyPositions = this.plate.map((points, pos) => ({ points, pos })).filter(d => d.points == 0 && d.pos > 0).map(d => d.pos);
+    const emptyPositions = this.plate.map((points, pos) => ({ points, pos })).filter(d => d.pos > 0 && d.points == 0).map(d => d.pos);
     if (emptyPositions.length > 0) {
       const randomPosition = emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
       const possiblity = Math.random();

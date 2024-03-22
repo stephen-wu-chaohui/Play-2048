@@ -23,7 +23,7 @@ const App = Vue.createApp({
     }, 'GamePlate.settings');
 
     const speed = ref(0);
-    const autoDriveSpeeds = [50, 150, 300, 600, 1300, 2100, 3000]
+    const autoDriveSpeeds = [20, 150, 300, 900, 1800, 3000, 5000]
 
     function setSpeed() {
       let setingAutoDrive = autoDriveSpeeds[speed.value];
@@ -97,6 +97,7 @@ const App = Vue.createApp({
     function newGame() {
       scores.score = 0;
       workingArea.newGame();
+      clearAlgorithmRecorder();
       gameOver.value = workingArea.gameOver();
       react();
     }
@@ -128,12 +129,13 @@ const App = Vue.createApp({
         gameOver.value = false; // workingArea.gameOver();
       }
       runningModes.isReplaying = true;
+      dumpAlgorithmRecorder();
       if (steps) {
         for (const step of steps) {
           if (runningModes.isReplaying) {
             runningModes.currentCommand = workingArea.replayStep(step);
-            await react();
-            await delay(settings.autoDrive - 2 * settings.animation);
+            react();
+            await delay(settings.autoDrive);
           }
         }
       }
@@ -201,6 +203,7 @@ const App = Vue.createApp({
       document.addEventListener('swiped', e => {
         doCommand({ code: 'arrow' + e.detail.dir });
       });
+      window.scrollTo(1, 0);
     });
 
     onUnmounted(() => {

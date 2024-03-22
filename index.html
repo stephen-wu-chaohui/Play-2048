@@ -38,16 +38,19 @@
       </div>
     </div>
     <div class="above-game">
-      <p class="game-intro">Join the tiles, get to <strong>2024!</strong></p>
+      <p class="game-intro">Join the tiles, get to <strong>2024-3-21.1</strong></p>
       <div class="buttons">
-        <a class="button" id="restart" @click="newGame()">
+        <a class="button" @click="newGame()">
           New
         </a>
-        <a class="button" id="autoDrive" @click="startAutoMode()" :class="{active: !!runningModes.hiAutoDrive}">
+        <a class="button" @click="startAutoMode()" :class="{active: !!runningModes.hiAutoDrive}">
           Auto
         </a>
-        <a class="button" id="hack" @click="startHackMode()" :class="{active: !!runningModes.hiHack}">
+        <!-- <a class="button" @click="startHackMode()" :class="{active: !!runningModes.hiHack}">
           Hack
+        </a> -->
+        <a class="button" @click="replayGame()" :class="{active: !!runningModes.isReplaying}">
+          Replay
         </a>
       </div>
     </div>
